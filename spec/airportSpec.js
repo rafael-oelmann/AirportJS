@@ -1,4 +1,5 @@
-const { Airport } = require('../src/airport.js')
+const { Airport } = require('../src/airport.js');
+const weather = require('../src/weather.js');
 
 describe('airport', () => {
   let airport;
@@ -8,6 +9,23 @@ describe('airport', () => {
 
     airport = new Airport();
     plane = jasmine.createSpy('plane');
+
+  });
+
+  describe('constructor', () => {
+
+    it('has a defauly capacity of 5', () => {
+
+      expect(airport.capacity).toEqual(5);
+
+    });
+
+    it('allows user to create airport capacity', () => {
+
+      largeAirport = new Airport(50)
+      expect(largeAirport.capacity).toEqual(50);
+
+    });
 
   });
 
@@ -26,6 +44,14 @@ describe('airport', () => {
       }
 
       expect(function() { airport.land(plane) }).toThrow('Airport is full')
+
+    });
+
+    it('prevents landing if the weather is stormy', () => {
+
+      spyOn(airport, 'stormy').and.returnValue(true);
+
+      expect(function() { airport.land(plane) }).toThrow('Weather too stormy to land');
 
     });
 

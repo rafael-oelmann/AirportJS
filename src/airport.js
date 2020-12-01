@@ -1,3 +1,5 @@
+const { Weather } = require('./weather.js')
+
 class Airport {
 
   constructor(capacity = 5) {
@@ -6,6 +8,9 @@ class Airport {
   }
 
   land(plane){
+    if (this.stormy()) {
+      throw('Weather too stormy to land')
+    }
     if (this.full()) {
       throw('Airport is full');
     } 
@@ -20,6 +25,10 @@ class Airport {
 
     return this.planeArray.length === this.capacity
 
+  }
+
+  stormy() {
+    new Weather().weather() === 'stormy';
   }
 
 }
