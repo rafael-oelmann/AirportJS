@@ -20,6 +20,15 @@ describe('airport', () => {
 
     });
 
+    it('prevent landing when the airport is full', () => {
+      for (let i = 1; i <= 5; i++) {
+        airport.land(plane);
+      }
+
+      expect(function() { airport.land(plane) }).toThrow('Airport is full')
+
+    });
+
   });
 
   describe('takeOff', () => {
