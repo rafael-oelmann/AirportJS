@@ -61,10 +61,20 @@ describe('airport', () => {
 
     it('removes a plane from planeArray once taken off', () => {
 
+      spyOn(airport, 'stormy').and.returnValue(false);
+
       airport.land(plane);
       airport.takeOff();
 
       expect(airport.planeArray.length).toBe(0);
+
+    });
+
+    it('prevents a plane from taking off is weather is stormy', () => {
+
+      spyOn(airport, 'stormy').and.returnValue(true);
+
+      expect(function () { airport.takeOff() }).toThrow('Weather too stormy for take off');     
 
     });
 

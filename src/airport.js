@@ -9,7 +9,7 @@ class Airport {
 
   land(plane){
     if (this.stormy()) {
-      throw('Weather too stormy to land')
+      throw('Weather too stormy to land');
     }
     if (this.full()) {
       throw('Airport is full');
@@ -18,6 +18,9 @@ class Airport {
   }
 
   takeOff() {
+    if (this.stormy()) {
+      throw('Weather too stormy for take off');
+    }
     this.planeArray.shift();
   }
 
